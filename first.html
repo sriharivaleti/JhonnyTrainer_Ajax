@@ -1,0 +1,49 @@
+<html>
+<head>
+<script>
+function fun1()
+{
+var a;
+ 
+    if (window.XMLHttpRequest)
+    {// If the browser if IE7+[or]Firefox[or]Chrome[or]Opera[or]Safari
+      a=new XMLHttpRequest();
+    }
+   else
+    {//If browser is IE6, IE5
+      a=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+ 
+a.onreadystatechange=function()
+{
+  if (a.readyState==4 && a.status==200)
+  {
+    document.getElementById("myDiv").innerHTML=a.responseText;
+   }
+}
+ 
+a.open("POST","first.txt",true);
+a.send();
+} // fun1() close
+</script>
+</head>
+<body>
+ 
+<div id="myDiv" style="width: 300px; height: 30px;">Click on the button below</div>
+<button type="button" onclick="fun1()">Change Content</button>
+ 
+</body>
+</html>
+
+<!-- Explanation
+Once the document loaded then immediately we will be able to see one button Change Content , and see i have been given onclick=”fun1()” [ line number 33 ] means once we click on this button controller will go to line number 4 and will starts execute that fun1()
+At line number 6, i have taken one variable with name a
+For any ajax program, we must create one request object to send our ajax request to the server, that ajax object is nothing but XMLHttpRequest object
+See line number 8,  i have written window.XMLHttpRequest means am checking whether my browser supports XMLHttpRequest object or not, if yes assigning XMLHttpRequest object into a [ a=new XMLHttpRequest(); ] else i mean if our web browser doesnt supports XMLHttpRequest object then we can assign ActiveXObject   [ which supports old web browsers ] into our variable a [  a=new ActiveXObject(“Microsoft.XMLHTTP”); ]
+So from line numbers 8 -15 request object creation work been done
+Now controller directly jumps to line number 25,  and opens the connection and send the request to java4s.txt (this is my notepad file), see actually the 3rd parameter i have given as true means Asynchronous data transfer will be activated
+Finally request will be sent in line number 26, that’s it.
+If server sends the response back to our application then controller will automatically execute from line number 17 – 23, you may get one doubt like why its not executed initially… ? there is a reason actually this a.onreadystatechange=function() executes only when we get the response from the server, hope you are clear ;)
+
+
+  -->

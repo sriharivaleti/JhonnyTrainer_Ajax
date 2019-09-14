@@ -1,0 +1,40 @@
+<html>
+<body>
+
+<script language="javascript" type="text/javascript">
+function send_with_ajax(){
+ document.getElementById("req_text").innerHTML = "Process Started...";
+ if (window.XMLHttpRequest || window.ActiveXObject) {
+   if (window.ActiveXObject) {
+     try {
+       xhr = new ActiveXObject("Msxml2.XMLHTTP");
+     } catch(exception) {
+       xhr = new ActiveXObject("Microsoft.XMLHTTP");
+     }
+   } else {
+      xhr = new XMLHttpRequest(); 
+   }
+ } else {
+    alert("Your browser does not support XMLHTTP Request...!");
+ }
+
+ xhr.open("GET", "first.txt", true);    // Make sure file is in same server
+ xhr.send(null);
+
+ xhr.onreadystatechange = function(){ 
+   if (xhr.readyState == 4) {
+     if(xhr.status == 200){
+     document.getElementById("req_text").innerHTML = "Response State : " + xhr.readyState + "<br />Response Text: <br />" + xhr.responseText; 
+   } else {
+     document.getElementById("req_text").innerHTML = "Error Code: " + xhr.status + "<br />" 
+      + "Error Message: " + xhr.statusText;
+   }
+   }
+ };
+}
+</script>
+
+<button onClick="send_with_ajax()">Get Contain</button>
+<p id="req_text"></p>
+</body>
+</html>
